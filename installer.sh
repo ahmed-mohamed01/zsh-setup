@@ -83,15 +83,15 @@ echo -e "Installing dependency build-essential"
 sudo apt-get install -y build-essential &> logs/build_essential_install.log
 # Installing bat
 echo -e "Installing bat..."
-brew install bat
+brew install bat &> /dev/null
 echo -c "Installing eza..."
-brew install eza
+brew install eza &> /dev/null
 echo - "Installing fzf..."
-brew install fzf
+brew install fzf &> /dev/null
 echo -e "Installing fd"
-brew install fd
+brew install fd &> /dev/null
 echo -e "Installing zoxide..."
-brew install zoxide
+brew install zoxide &> /dev/null
 echo "Required programs installed successfully."
 
 # Add spacing for clarity
