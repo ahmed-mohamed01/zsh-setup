@@ -79,18 +79,18 @@ if ! prompt_yes_no "Do you want to proceed?"; then
     exit 1
 fi
 
-echo -e "Installing dependency build-essential"
+echo "Installing dependency build-essential"
 sudo apt-get install -y build-essential &> logs/build_essential_install.log
 # Installing bat
-echo -e "Installing bat..."
+echo "Installing bat..."
 brew install bat &> /dev/null
-echo -c "Installing eza..."
+echo "Installing eza..."
 brew install eza &> /dev/null
-echo - "Installing fzf..."
+echo "Installing fzf..."
 brew install fzf &> /dev/null
-echo -e "Installing fd"
+echo "Installing fd"
 brew install fd &> /dev/null
-echo -e "Installing zoxide..."
+echo "Installing zoxide..."
 brew install zoxide &> /dev/null
 echo "Required programs installed successfully."
 
