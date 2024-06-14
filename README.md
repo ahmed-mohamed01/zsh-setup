@@ -109,12 +109,14 @@ cp .zshrc .p10k.zsh ~/
 ```
 
 ### 5. Install NerdFont.
-Either download and install a font from https://www.nerdfonts.com/, or use the command belowto install MesloLGM Nerd Font
+Either download and install a font from https://www.nerdfonts.com/, or use the command belowto install MesloLGM Nerd Font.
+
+Or Install fonts in the Fonts folder in the repo. 
 
 ```bash
 mkdir -p ~/.local/share/fonts
-curl -fLo "$HOME/.local/share/fonts/MesloLGM NF Regular.ttf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Meslo/L/Regular/MesloLGM%20NF%20Regular.ttf &> font_install.log
-if [ $? -ne 0 ]; then
+curl -fLo "$HOME/.local/share/fonts/MesloLGM NF Regular.ttf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Meslo/L/Regular/MesloLGM%20NF%20Regular.ttf
+fc-cache -fv
 ```
 
 ### Initialize .zshrc
