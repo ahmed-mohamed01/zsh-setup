@@ -15,16 +15,19 @@ This repo will store the set up files and settings for zsh so that I can get up 
 
 ### 1. ZSH setup
 
-<!-- Quick version: 
-```
+Quick version: 
+```bash
 # Clone this repo
 git clone https://github.com/ahmed-mohamed01/zsh-setup
-cd zsh-setup
 
-# Run installer
-./install.sh
+# Run installer. This will verify that you want to install the main packages. 
+cd zsh-setup
+./install-fullprompt.sh
+
+# For an unattended setup, run:
+yes "y" | installer-less-prompts.sh
 ```
-## Manual Installation -->
+## Manual Installation
 
 ### 1. Install zsh
 On debian based linux distros, install using:
