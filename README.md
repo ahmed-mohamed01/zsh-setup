@@ -22,6 +22,7 @@ git clone https://github.com/ahmed-mohamed01/zsh-setup
 
 # Run installer. This will verify that you want to install the main packages. 
 cd zsh-setup
+chmod +x ./installer-less-prompts.sh ./install-fullprompt.sh  # Makes the scripts executable. 
 ./install-fullprompt.sh
 
 # For an unattended setup, run:
