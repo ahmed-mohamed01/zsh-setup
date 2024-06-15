@@ -79,25 +79,30 @@ if ! prompt_yes_no "Do you want to proceed?"; then
     exit 1
 fi
 
-echo "Installing dependency build-essential"
+simulate_progress "Installing dependency build-essential"
 sudo apt-get install -y build-essential &> logs/build_essential_install.log
-# Installing bat
-echo "Installing bat..."
-brew install bat &> /dev/null
-echo "Installing eza..."
-brew install eza &> /dev/null
-echo "Installing fzf..."
-brew install fzf &> /dev/null
-echo "Installing fd"
-brew install fd &> /dev/null
-echo "Installing zoxide..."
-brew install zoxide &> /dev/null
+if [ $? -ne 0 ]; then
+    echo "build-essential installation failed. Exiting."
+    exit 1
+fi
+
+# Install the required programs using Homebrew with simulated progress
+packages=("bat" "eza" "fd" "fzf" "zoxide")
+echo "Installing required programs using Homebrew..."
+for pkg in "${packages[@]}"; do
+    simulate_progress "Installing $pkg"
+    brew install "$pkg" &> logs/brew_$pkg_install.log
+    if [ $? -ne 0 ]; then
+        echo "Installation of $pkg failed. Check logs/brew_$pkg_install.log for details. Exiting."
+        exit 1
+    fi
+done
 echo "Required programs installed successfully."
 
 # Add spacing for clarity
 echo -e "\n"
 
-# Clone the GitHub repository and set up Zsh configuration
+# Set up Zsh configuration
 echo "Setting up Zsh and P10k configuration..."
 cp -r config/. ~/
 echo "Zsh settings have been loaded."
@@ -116,6 +121,9 @@ if prompt_yes_no "Change default shell to Zsh?"; then
     chsh -s $(which zsh)
     echo "Default shell changed to Zsh. Please log out and log back in for the change to take effect."
 fi
+
+echo "Cleaning up the installation files.."
+rm -r $PWD
 
 echo "Installation and setup complete."
 echo -e "\n"
