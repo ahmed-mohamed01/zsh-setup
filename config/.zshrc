@@ -5,9 +5,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Load homebbrew, if it is installed
 if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] then
-  # Load homebbrew, if it is installed
-  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)  
 fi
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -83,8 +83,9 @@ if command -v fzf &> /dev/null; then  # If fzf is installed, initializes fzf and
 fi
 
 if command -v zoxide &> /dev/null; then # Checks if zoxide is installed and Initialize zoxide
-    eval "$(zoxide init --cmd cd zsh)"
     export _ZO_DATA_DIR=~/     ## Set zoxide to save db to home folder, so it can be added to dotfile backup easily. 
+    eval "$(zoxide init --cmd cd zsh)"
+    
 fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
