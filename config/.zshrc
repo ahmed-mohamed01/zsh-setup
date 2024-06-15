@@ -29,7 +29,7 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
-# Add in snippets
+# Add in snippets / Oh my zsh plugins
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
@@ -63,6 +63,11 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
+# Misc Environmental variables
+export ZSH_AUTOSUGGEST_STRATEGY=(
+    history
+    completion
+)
 # Aliases
 if command -v eza &> /dev/null; then
   alias ls='eza --icons --git'        # If eza is installed, set an alias for ls --> eza --icons
