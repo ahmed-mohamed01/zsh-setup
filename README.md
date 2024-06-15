@@ -4,14 +4,31 @@ This repo will store the set up files and settings for zsh so that I can get up 
 ### Demo
 ![alt text](demo-images/demo.gif)
 
-### Features
-- ZSH under the hood, which is fast and well supported. 
-- P10K prompt/theme - clean and easy to use.
+### What is included
+- Its zsh, with P10K prompt (theme)
+- P10K prompt - clean, fast and easy to use.
+  - can be customized further by ```p10k configure``` or editing ```~/.p10k.zsh```
+  - This is installed first time zsh is opened.
 - Uses zinit as package manager - quick and less overhead. 
-- FISH like zsh-autosuggestions will autofill commands as you type, and learn as you use ZSH more.
+  - zinit is installed first time zsh is opened.
+  - ziniti will install plugins in .zshrc when it is intialized. 
+- FISH like zsh-autosuggestions will autofill commands as you type, autofill while you ```cd```!! and learn as you use ZSH more.
 - zsh-syntax-highlighting applied to make commands easier to follow.
 - [Zoxide](https://github.com/ajeetdsouza/zoxide) will allow ``` cd ``` replacement, and support autojump
-- [Fzf](https://github.com/junegunn/fzf) will allow rapid navigation and ability to find and open files quickly. This can be used to open files quickly using vim / nano (eg ```$ nvim ** ``` + ```<tab>``` ), or search through your previous commands (ctrl + r)
+- [Fzf](https://github.com/junegunn/fzf) will allow rapid navigation and ability to find and open files quickly. 
+- Fzf can be used to:
+  - Navigate faster - ```cd ``` +  ```tab``` to open fzf and navigate directories using arrows and /
+  - Search and  to open files quickly using vim / nano (eg ```$ nvim --``` + ```<tab>``` ) (```$cd /dev--``` + tab to start fzf from /dev)
+  - Search through your previous commands  with (ctrl + r)
+  - Call fzf from anywhere with ctr + t
+- Useful aliases:
+  - ls = 'exa --icons --git'
+  - c = 'clear'
+  - apt = 'sudo apt'
+  - zoxide is initialized as cd
+- fzf bindings enabled by default.
+- emac bindings by default. 
+- Alias + bindings will check if the respective program is installed before initializing, preventing ererors. 
 
 ### 1. ZSH setup
 
@@ -103,7 +120,7 @@ brew install bat eza fd fzf zoxide
 ```
 ### 4. Set up ZSH using .zshrc
 
-The given .zshrc will contain settings to install [Power10K](https://github.com/romkatv/powerlevel10k) prompt on first boot and and initialize it, as well as initialize rest of the apps mentioned above, in zsh. 
+The .zshrc in config/ will contain settings to install [Power10K](https://github.com/romkatv/powerlevel10k) prompt on first boot and and initialize it, as well as initialize rest of the apps mentioned above, in zsh. 
 
 <details>
 
@@ -131,13 +148,21 @@ cp .zshrc .p10k.zsh ~/
 ```
 
 ### 5. Install NerdFont.
-Either download and install a font from https://www.nerdfonts.com/, or use the command below, to install MesloLGM Nerd Font.
+Either download and install a font from https://www.nerdfonts.com/.
 
-Or Install fonts in the Fonts folder in the repo. 
+Install fonts in the Fonts folder in the repo. 
+```bash
+mkdir -p ~/.local/share/fonts
+cp fonts/MesloLGMNerdFont-Italic.ttf ~/.local/share/fonts/
+cp fonts/MesloLGMNerdFont-Regular.ttf ~/.local/share/fonts/
+cp fonts/MesloLGMNerdFont-Bold.ttf ~/.local/share/fonts/
+fc-cache -fv &> logs/font_cache.log
+```
+Or use the command below, to install MesloLGM Nerd Font.
 
 ```bash
 mkdir -p ~/.local/share/fonts
-curl -fLo "$HOME/.local/share/fonts/MesloLGM NF Regular.ttf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Meslo/L/Regular/MesloLGM%20NF%20Regular.ttf
+curl -fLo "$HOME/.local/share/fonts/MesloLGM NF Regular.ttf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Meslo/M/Regular/MesloLGMNerdFont-Regular.ttf
 fc-cache -fv
 ```
 
