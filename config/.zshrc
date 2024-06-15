@@ -5,7 +5,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-if [[ -f "/opt/homebrew/bin/brew" ]] then
+if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] then
   # Load homebbrew, if it is installed
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 fi
@@ -65,7 +65,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
 if command -v eza &> /dev/null; then
-  alias ls='eza --icons'        # If eza is installed, set an alias for ls --> eza --icons
+  alias ls='eza --icons --git'        # If eza is installed, set an alias for ls --> eza --icons
   alias lst='eza --icons --tree --level=2'
 fi
 
@@ -75,12 +75,11 @@ alias apt='sudo apt'
 # Shell integrations
 if command -v fzf &> /dev/null; then  # If fzf is installed, initializes fzf and sets up sane fzf defaults. 
   eval "$(fzf --zsh)"
-  #export FZF_DEFAULT_COMMAND="fd . $HOME"   # Set up fd as default instead of GNU Find.
-  export FZF_DEFAULT_COMMAND='fd --type file --hidden'
-  export FZF_COMPLETION_TRIGGER='--'
+  export FZF_DEFAULT_COMMAND='fd --type file --hidden' # Set up fd as default instead of GNU Find.
+  export FZF_COMPLETION_TRIGGER='--'                   # Change the tab-shortcut from ** to --
   export FZF_DEFAULT_OPTS="--preview 'bat --color=always {}'"
-  #export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-  #export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 fi
 
 if command -v zoxide &> /dev/null; then # Checks if zoxide is installed and Initialize zoxide
