@@ -112,8 +112,6 @@ if prompt_yes_no "ZSH installed successfully. Change default shell to Zsh?"; the
         exit 1
     else
         echo "Success!! ZSH Changed to default shell. You will need to log back in to apply the change."
-        echo "Cleaning up the installation files.."
-        rm -r $PWD
         echo "Default shell changed to Zsh. Please log out and log back in for the change to take effect."
         echo "You can now open zsh by:"
         echo -e "\n"

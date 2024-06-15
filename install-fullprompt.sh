@@ -130,9 +130,6 @@ if prompt_yes_no "Change default shell to Zsh?"; then
     echo "Default shell changed to Zsh. Please log out and log back in for the change to take effect."
 fi
 
-echo "Cleaning up the installation files.."
-rm -r $PWD
-
 echo "Installation and setup complete."
 echo -e "\n"
 echo "If  the p10k theme is not to your preference, you can use "p10k configure" to change this."
