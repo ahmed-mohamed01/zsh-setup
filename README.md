@@ -126,11 +126,12 @@ git clone https://github.com/ahmed-mohamed01/zsh-setup.git
 cd zsh-setup
 
 # Copy ZSH settings and Power10K Prompt settings to Home folder. 
+mv ~/.zshrc ~/.zshrc-orig  # Optional, back up any existing zshrc
 cp .zshrc .p10k.zsh ~/
 ```
 
 ### 5. Install NerdFont.
-Either download and install a font from https://www.nerdfonts.com/, or use the command belowto install MesloLGM Nerd Font.
+Either download and install a font from https://www.nerdfonts.com/, or use the command below, to install MesloLGM Nerd Font.
 
 Or Install fonts in the Fonts folder in the repo. 
 
