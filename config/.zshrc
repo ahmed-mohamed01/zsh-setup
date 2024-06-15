@@ -71,6 +71,7 @@ fi
 
 alias c='clear'
 alias apt='sudo apt'
+alias zshconfig='code ~/.zshrc'
 
 # Shell integrations
 if command -v fzf &> /dev/null; then  # If fzf is installed, initializes fzf and sets up sane fzf defaults. 
