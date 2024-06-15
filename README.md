@@ -47,9 +47,26 @@ Installation (obtained from Homebrew website:
 
 If you are using bash, initialize brew by:
 ```bash
-echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bashrc
-eval "$(/opt/homebrew/bin/brew shellenv)"
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 ```
+<details>
+
+<summary> For other Shells </summary>
+
+For FISH
+```bash
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"  # Initiates brew for current session.
+set -Ux fish_user_paths $fish_user_paths /home/linuxbrew/.linuxbrew/bin  # Adds to FISH path. 
+echo 'set -Ux fish_user_paths $fish_user_paths /home/linuxbrew/.linuxbrew/bin' >> ~/.config/fish/config.fish
+```
+For ZSH
+```bash
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zshrc
+```
+</details>
+
 ### 3. Install zoxide, fzf, fd, exa using brew
 
 <details>
