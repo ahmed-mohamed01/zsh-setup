@@ -16,6 +16,14 @@ prompt_yes_no() {
         esac
     done
 }
+# This function will be used to simulate progress while installing extras. 
+simulate_progress() {
+    local message=$1
+    echo -n "$message..."
+    sleep 1 
+    echo "done"
+}
+
 
 mkdir logs
 
@@ -29,9 +37,9 @@ fi
 echo -e "\nChecking if Zsh is installed..."
 if ! command_exists zsh; then
     if prompt_yes_no "Zsh is not installed. Do you want to install Zsh?"; then
+        echo -e "\nInstalling Zsh"
         sudo apt update &> /dev/null
         sudo apt install -y zsh &> /dev/null
-        echo -e "\nInstalling Zsh"
     else
         echo "Zsh installation is required for rest of this setup. Exiting."
         exit 1
@@ -40,7 +48,7 @@ fi
 
 if ! command_exists brew; then
     if prompt_yes_no "Brew needs to be installed to ensure up to date versions of bat, fd, fzf, eza and zoxide are installed. Continue?"; then
-        echo "Installing Homebrew..."
+        echo "Installing Homebrew. This will take some time..."
         yes "" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" &> logs/brew_install.log
         if [ $? -ne 0 ]; then
             echo "Homebrew installation failed. Check logs/brew_install.log for details. Exiting."
