@@ -2,7 +2,7 @@
 This repo will store the set up files and settings for zsh so that I can get up and running quickly, when I foolishly mess something up. 
 
 ### Demo
-
+![alt text](demo-images/demo.gif)
 
 ### Features
 - ZSH under the hood, which is fast and well supported. 
@@ -22,7 +22,6 @@ git clone https://github.com/ahmed-mohamed01/zsh-setup
 
 # Run installer. This will verify that you want to install the main packages. 
 cd zsh-setup
-chmod +x ./installer-less-prompts.sh ./install-fullprompt.sh  # Makes the scripts executable. 
 ./install-fullprompt.sh
 
 # For an unattended setup, run:
@@ -82,7 +81,8 @@ echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zshrc
 
 3b. ``` fzf ``` - fuzzy finder using GNU find, allows you to rapidly search for and natigate to/open files and folders.
 - [Fzf](https://github.com/junegunn/fzf) is a versatile fuzzy finder, writen in GO 
-- Can be used to rapidly seatch through files and folders. eg ```$ cd ** ``` + press ``` <tab> ``` will allow you to open a fzf prompt to fuzzy search directories from current folder. ```$ cd /mnt** <tab> ``` will allow you to search from the /mnt folder. ```$ vi ** <tab> ``` will allow you to search for and open files using vim, from current folder. 
+- Can be used to rapidly seatch through files and folders. eg ```$ cd ** ``` + press ``` <tab> ``` will allow you to open a fzf prompt to fuzzy search directories from current folder. ```$ cd /mnt-- <tab> ``` will allow you to search from the /mnt folder. ```$ vi -- <tab> ``` will allow you to search for and open files using vim, from current folder. 
+- 
 
 3c. ``` fd ``` - replacement for ``` GNU find ``` that we are going to use with fzf. 
 - [fd](https://github.com/sharkdp/fd) is included as it is Faster, more versatile and respects ```.ignore ``` & ```.gitignore```.
@@ -143,8 +143,8 @@ fc-cache -fv
 
 ### Initialize .zshrc
 ```bash
-source ~/.zshrc
 exec zsh
+source ~/.zshrc
 ```
 This will apply the settings from zshrc, and p10k.zsh.
 
