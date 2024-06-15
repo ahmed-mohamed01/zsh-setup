@@ -69,27 +69,29 @@ export ZSH_AUTOSUGGEST_STRATEGY=(
     completion
 )
 # Aliases
-if command -v eza &> /dev/null; then
-  alias ls='eza --icons --git'        # If eza is installed, set an alias for ls --> eza --icons
+if command -v eza &> /dev/null; then  ## If eza is installed, set an alias for ls --> eza --icons, highlights changes to git. 
+  alias ls='eza --icons --git'        
   alias lst='eza --icons --tree --level=2'
+fi
+if command -v code &> /dev/null; then ## If vscode is installed, it will open zshrc in vscode.
+  alias zshconfig='code ~/.zshrc'
 fi
 
 alias c='clear'
 alias apt='sudo apt'
-alias zshconfig='code ~/.zshrc'
 
 # Shell integrations
-if command -v fzf &> /dev/null; then  # If fzf is installed, initializes fzf and sets up sane fzf defaults. 
+if command -v fzf &> /dev/null; then                   ## If fzf is installed, initializes fzf and sets up sane fzf defaults. 
   eval "$(fzf --zsh)"
-  export FZF_DEFAULT_COMMAND='fd --type file --hidden' # Set up fd as default instead of GNU Find.
-  export FZF_COMPLETION_TRIGGER='--'                   # Change the tab-shortcut from ** to --
+  export FZF_DEFAULT_COMMAND='fd --type file --hidden' ## Set up fd as default instead of GNU Find.
+  export FZF_COMPLETION_TRIGGER='--'                   ## Change the tab-shortcut from ** to --
   export FZF_DEFAULT_OPTS="--preview 'bat --color=always {}'"
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
   export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 fi
 
-if command -v zoxide &> /dev/null; then # Checks if zoxide is installed and Initialize zoxide
-    export _ZO_DATA_DIR=~/     ## Set zoxide to save db to home folder, so it can be added to dotfile backup easily. 
+if command -v zoxide &> /dev/null; then ## Checks if zoxide is installed and Initialize zoxide
+    export _ZO_DATA_DIR=~/              ## Set zoxide to save db to home folder, so it can be added to dotfile backup easily. 
     eval "$(zoxide init --cmd cd zsh)"
     
 fi
