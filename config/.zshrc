@@ -5,6 +5,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+if [[ -f "/opt/homebrew/bin/brew" ]] then
+  # Load homebbrew, if it is installed
+  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+fi
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -20,7 +24,6 @@ source "${ZINIT_HOME}/zinit.zsh"
 # Add in Powerlevel10k
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 # Add in zsh plugins
-#zinit light zsh-users/zsh-syntax-highlighting
 zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
@@ -30,20 +33,18 @@ zinit light Aloxaf/fzf-tab
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
+zinit snippet OMZP::nvm
+zinit snippet OMZP::colored-man-pages
 
 # Load completions
 autoload -Uz compinit && compinit
-
 zinit cdreplay -q
 
 # Keybindings
 bindkey -e
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
-bindkey '^[w' kill-region
 
 # History
-HISTSIZE=5000
+HISTSIZE=10000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
@@ -63,13 +64,13 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv) #Initializes brew
 if command -v eza &> /dev/null; then
-  alias ls='eza --icons' # If eza is installed, set an alias for ls --> eza
+  alias ls='eza --icons'        # If eza is installed, set an alias for ls --> eza --icons
   alias lst='eza --icons --tree --level=2'
 fi
 
 alias c='clear'
+alias apt='sudo apt'
 
 # Shell integrations
 if command -v fzf &> /dev/null; then  # If fzf is installed, initializes fzf and sets up sane fzf defaults. 
@@ -80,11 +81,11 @@ if command -v fzf &> /dev/null; then  # If fzf is installed, initializes fzf and
   export FZF_DEFAULT_OPTS="--preview 'bat --color=always {}'"
   #export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
   #export FZF_ALT_C_COMMAND="fd -t d . $HOME"
-
 fi
 
 if command -v zoxide &> /dev/null; then # Checks if zoxide is installed and Initialize zoxide
     eval "$(zoxide init --cmd cd zsh)"
+    export _ZO_DATA_DIR=~/     ## Set zoxide to save db to home folder, so it can be added to dotfile backup easily. 
 fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
