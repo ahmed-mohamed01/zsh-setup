@@ -51,27 +51,31 @@ if ! command_exists zsh; then
     fi
 fi
 
-echo "Installing Homebrew. This might take some time..."
-yes "" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" &> logs/brew_install.log
-if [ $? -ne 0 ]; then
-    echo "Homebrew installation failed. Check logs/brew_install.log for details. Exiting."
-    exit 1
-else
-    # Detect the shell and initialize Homebrew into the shell
-    echo "Initializing Homebrew into the shell..."
-    if [ -n "$ZSH_VERSION" ]; then
-        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-        echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zshrc
-    elif [ -n "$BASH_VERSION" ]; then
-        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-        echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
-        source ~/.bashrc  # Make sure to source .bashrc to apply changes
-    elif [ -n "$FISH_VERSION" ]; then
-        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-        set -Ux fish_user_paths $fish_user_paths /home/linuxbrew/.linuxbrew/bin
-        echo 'set -Ux fish_user_paths $fish_user_paths /home/linuxbrew/.linuxbrew/bin' >> ~/.config/fish/config.fish
+if ! command_exists brew; then
+    echo "Brew needs to be installed to ensure up to date versions of bat, fd, fzf, eza and zoxide are installed"
+    echo "Installing Homebrew..."
+    yes "" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" &> logs/brew_install.log
+    if [ $? -ne 0 ]; then
+        echo "Homebrew installation failed. Check logs/brew_install.log for details. Exiting."
+        exit 1
+    else
+        # Detect the shell and initialize Homebrew into the shell
+        echo "Initializing Homebrew into the shell..."
+        if [ -n "$ZSH_VERSION" ]; then
+            eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+            echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zshrc
+        elif [ -n "$BASH_VERSION" ]; then
+            eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+            echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
+            source ~/.bashrc  # Make sure to source .bashrc to apply changes
+        elif [ -n "$FISH_VERSION" ]; then
+            eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+            set -Ux fish_user_paths $fish_user_paths /home/linuxbrew/.linuxbrew/bin
+            echo 'set -Ux fish_user_paths $fish_user_paths /home/linuxbrew/.linuxbrew/bin' >> ~/.config/fish/config.fish
+        fi
+        echo "Homebrew installed."
     fi
-    echo "Homebrew installed."
+
 fi
 
 packages=("bat" "eza" "fd" "fzf" "zoxide")
