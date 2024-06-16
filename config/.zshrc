@@ -72,6 +72,7 @@ export ZSH_AUTOSUGGEST_STRATEGY=(
 if command -v eza &> /dev/null; then  ## If eza is installed, set an alias for ls --> eza --icons, highlights changes to git. 
   alias ls='eza --icons --git'        
   alias lst='eza --icons --tree --level=2'
+  alias lsd='eza --icons --tree -d'
 fi
 if command -v code &> /dev/null; then ## If vscode is installed, it will open zshrc in vscode.
   alias zshconfig='code ~/.zshrc'
