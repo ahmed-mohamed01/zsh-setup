@@ -42,6 +42,8 @@ zinit cdreplay -q
 
 # Keybindings
 bindkey -e
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
 
 # History
 HISTSIZE=10000
@@ -80,7 +82,6 @@ fi
 
 alias c='clear'
 alias apt='sudo apt'
-
 
 # Shell integrations
 if command -v fzf &> /dev/null; then                   ## If fzf is installed, initializes fzf and sets up sane fzf defaults. 
