@@ -12,7 +12,6 @@ brew 'zoxide'         # Easy navigation (better cd)
 # brew 'rm-improved'  # Improved version of the 'rm' command with trash folder support
 # brew 'bandwhich'    # Terminal bandwidth utilization tool
 # brew 'ctop'         # Top-like interface for container metrics
-# brew 'bpytop'       # Resource monitor that shows usage and stats for processor, memory, disks, network, and processes
 # brew 'glances'      # System monitoring tool - a better htop
 # brew 'speedtest-cli' # Command-line interface for testing internet bandwidth using speedtest.net
 # brew 'nvm'          # Node Version Manager - Simple bash script to manage multiple active Node.js versions
