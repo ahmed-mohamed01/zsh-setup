@@ -79,8 +79,9 @@ fi
 if command -v code &> /dev/null; then ## If vscode is installed, it will open zshrc in vscode.
   alias zshconfig='code ~/.zshrc'
 fi
-if [[ -n "$WSL_DISTRO_NAME" && -x "$(command -v op.exe)" ]]; then ## Check if WSL is installed and if 1password is installed.
-  alias ssh="ssh.exe"                                             ## If both are true, set ssh to use ssh.exe
+if [[ -n "$WSL_DISTRO_NAME" ]]; then                                        ## Check if the distro is running on WSL, then enable the following if true. 
+  command -v op.exe &> /dev/null && alias ssh="ssh.exe"                     ## If 1password is installed.
+  command -v OneCommander.exe &> /dev/null && alias oc="OneCommander.exe ." ## If OneCommander is installed on Windows, open current folder in OneCommander.
 fi
 
 alias c='clear'
