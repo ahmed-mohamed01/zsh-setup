@@ -79,7 +79,7 @@ if ! command_exists brew; then
 fi
 # Install programms using Homebrew
 echo "Installing required programs using Homebrew..."
-brew bundle --file=Brewfile &> logs/brew_bundle.log
+brew bundle --file=Brewfile
 echo "Required programs installed successfully."
 
 # Set up Zsh configuration
