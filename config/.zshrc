@@ -80,8 +80,10 @@ if command -v eza &> /dev/null; then  ## If eza is installed, set an alias for l
   alias lsd='eza --icons --tree -d'
   alias la='eza --icons -a -l'
 fi
-if command -v code &> /dev/null; then ## If vscode is installed, it will open zshrc in vscode.
-  alias zshconfig='code ~/.zshrc'
+if command -v code &> /dev/null; then
+  alias zshconf='code ~/.zshrc'
+elif command -v micro &> /dev/null; then
+  alias zshconf='micro ~/.zshrc'
 fi
 if [[ -n "$WSL_DISTRO_NAME" ]]; then                                        ## Check if the distro is running on WSL, then enable the following if true. 
   command -v op.exe &> /dev/null && alias ssh="ssh.exe"                     ## If 1password is installed.
