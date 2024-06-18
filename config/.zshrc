@@ -71,6 +71,9 @@ export ZSH_AUTOSUGGEST_STRATEGY=(
     completion
 )
 # Aliases
+alias c='clear'
+alias apt='sudo apt'
+
 if command -v eza &> /dev/null; then  ## If eza is installed, set an alias for ls --> eza --icons, highlights changes to git. 
   alias ls='eza --icons --git'        
   alias lst='eza --icons --tree --level=2'
@@ -84,9 +87,6 @@ if [[ -n "$WSL_DISTRO_NAME" ]]; then                                        ## C
   command -v op.exe &> /dev/null && alias ssh="ssh.exe"                     ## If 1password is installed.
   command -v OneCommander.exe &> /dev/null && alias oc="OneCommander.exe ." ## If OneCommander is installed on Windows, open current folder in OneCommander.
 fi
-
-alias c='clear'
-alias apt='sudo apt'
 
 # Shell integrations
 if command -v fzf &> /dev/null; then                   ## If fzf is installed, initializes fzf and sets up sane fzf defaults. 
@@ -105,7 +105,7 @@ fi
 if command -v zoxide &> /dev/null; then ## Checks if zoxide is installed and Initialize zoxide
     export _ZO_DATA_DIR=~/              ## Set zoxide to save db to home folder, so it can be added to dotfile backup easily. 
     eval "$(zoxide init --cmd cd zsh)"
-    
+
 fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
