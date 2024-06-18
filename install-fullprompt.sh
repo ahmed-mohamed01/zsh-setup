@@ -24,7 +24,6 @@ simulate_progress() {
     echo "done"
 }
 
-
 mkdir logs
 
 # Check if the operating system is Debian-based
@@ -74,37 +73,22 @@ if ! command_exists brew; then
 fi
 
 # Inform the user about the installation
-echo "The following progams will be installed:"
-echo " - Powerlevel10k prompt for Zsh"
-echo " - bat"
-echo " - fzf"
-echo " - fd"
-echo " - eza"
-echo " - zoxide"
+echo "Programs will be installed according to Brewfile."
+echo "By Default this includes - bat, eza, fd, fzf, zoxide"
+echo "Please comment out apps you do not want to install in the Brewfile."
+echo "Press yes once you have made changes to Berefile."
+
 echo "More information can be found at: https://github.com/ahmed-mohamed01/zsh-setup"
 if ! prompt_yes_no "Do you want to proceed?"; then
     echo "Installation aborted."
     exit 1
 fi
 
-simulate_progress "Installing dependency build-essential"
 sudo apt-get install -y build-essential &> logs/build_essential_install.log
-if [ $? -ne 0 ]; then
-    echo "build-essential installation failed. Exiting."
-    exit 1
-fi
+echo "Build Essential installed."
 
-# Install the required programs using Homebrew with simulated progress
-packages=("bat" "eza" "fd" "fzf" "zoxide")
-echo "Installing required programs using Homebrew..."
-for pkg in "${packages[@]}"; do
-    simulate_progress "Installing $pkg"
-    brew install "$pkg" &> logs/brew_$pkg_install.log
-    if [ $? -ne 0 ]; then
-        echo "Installation of $pkg failed. Check logs/brew_$pkg_install.log for details. Exiting."
-        exit 1
-    fi
-done
+# Install required programs using Homebrew
+brew bundle install --file=Brewfile &> logs/brew_bundle_install.log
 echo "Required programs installed successfully."
 
 # Add spacing for clarity

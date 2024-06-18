@@ -77,17 +77,9 @@ if ! command_exists brew; then
     fi
 
 fi
-
-packages=("bat" "eza" "fd" "fzf" "zoxide")
+# Install programms using Homebrew
 echo "Installing required programs using Homebrew..."
-for pkg in "${packages[@]}"; do
-    simulate_progress "Installing $pkg"
-    brew install "$pkg" &> logs/brew_$pkg_install.log
-    if [ $? -ne 0 ]; then
-        echo "Installation of $pkg failed. Check logs/brew_$pkg_install.log for details. Exiting."
-        exit 1
-    fi
-done
+brew bundle --file=Brewfile &> logs/brew_bundle.log
 echo "Required programs installed successfully."
 
 # Set up Zsh configuration
