@@ -1,4 +1,4 @@
-This will make it easier to get started on a new machine.
+# This will make it easier to get started on a new machine.
 
 brew 'eza'            # Easy to use alias manager, with icons
 brew 'bat'            # Better cat, with syntax highlighting
