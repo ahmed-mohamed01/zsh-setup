@@ -73,6 +73,7 @@ export ZSH_AUTOSUGGEST_STRATEGY=(
 # Aliases
 alias c='clear'
 alias apt='sudo apt'
+alias python='python3'
 
 if command -v eza &> /dev/null; then  ## If eza is installed, set an alias for ls --> eza --icons, highlights changes to git. 
   alias ls='eza --icons --git'        
@@ -105,7 +106,7 @@ if command -v fzf &> /dev/null; then                   ## If fzf is installed, i
 fi
 
 if command -v zoxide &> /dev/null; then ## Checks if zoxide is installed and Initialize zoxide
-    export _ZO_DATA_DIR=~/              ## Set zoxide to save db to home folder, so it can be added to dotfile backup easily. 
+    # export _ZO_DATA_DIR=~/              ## Set zoxide to save db to home folder, so it can be added to dotfile backup easily. 
     eval "$(zoxide init --cmd cd zsh)"
 
 fi
