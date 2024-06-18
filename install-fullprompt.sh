@@ -76,7 +76,7 @@ fi
 echo "Programs will be installed according to Brewfile."
 echo "By Default this includes - bat, eza, fd, fzf, zoxide"
 echo "Please comment out apps you do not want to install in the Brewfile."
-echo "Press yes once you have made changes to Berefile."
+echo "Press yes once you have made changes to Brewfile."
 
 echo "More information can be found at: https://github.com/ahmed-mohamed01/zsh-setup"
 if ! prompt_yes_no "Do you want to proceed?"; then
