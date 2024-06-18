@@ -79,18 +79,25 @@ fi
 if command -v code &> /dev/null; then ## If vscode is installed, it will open zshrc in vscode.
   alias zshconfig='code ~/.zshrc'
 fi
+if [[ -n "$WSL_DISTRO_NAME" && -x "$(command -v op.exe)" ]]; then ## Check if WSL is installed and if 1password is installed.
+  alias ssh="ssh.exe"                                             ## If both are true, set ssh to use ssh.exe
+fi
 
 alias c='clear'
 alias apt='sudo apt'
 
 # Shell integrations
 if command -v fzf &> /dev/null; then                   ## If fzf is installed, initializes fzf and sets up sane fzf defaults. 
-  eval "$(fzf --zsh)"
-  export FZF_DEFAULT_COMMAND='fd --type file --hidden' ## Set up fd as default instead of GNU Find.
+  eval "$(fzf --zsh)" 
   export FZF_COMPLETION_TRIGGER='--'                   ## Change the tab-shortcut from ** to --
-  export FZF_DEFAULT_OPTS="--preview 'bat --color=always {}'"
-  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-  export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+  command -v bat &> /dev/null && {                     ## If bat is installed, set up fzf to use bat as the previewer.
+    export FZF_DEFAULT_OPTS='--preview "bat --color=always --style=numbers --line-range :500 {}"'
+  }
+  command -v fd &> /dev/null && {                      ## If fd is installed, set up fzf to use fd as the default command.
+    export FZF_DEFAULT_COMMAND='fd --type file --hidden'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+  }
 fi
 
 if command -v zoxide &> /dev/null; then ## Checks if zoxide is installed and Initialize zoxide
