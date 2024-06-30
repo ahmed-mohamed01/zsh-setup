@@ -16,6 +16,6 @@ brew 'rm-improved'  # Improved version of the 'rm' command with trash folder sup
 brew 'speedtest-cli' # Command-line interface for testing internet bandwidth using speedtest.net
 brew 'nvm'          # Node Version Manager - Simple bash script to manage multiple active Node.js versions
 brew 'micro'        # Better Nano replacement.
-brew 'rigprep'      # Faster grep replacement.
+brew 'ripgrep'      # Faster grep replacement.
 brew 'rsync'        # 
 brew 'midnight-commander'   # File explorer for terminal
