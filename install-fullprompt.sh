@@ -83,12 +83,12 @@ if ! prompt_yes_no "Do you want to proceed?"; then
     echo "Installation aborted."
     exit 1
 fi
-
+echo "Installing required programs..."
 sudo apt-get install -y build-essential &> logs/build_essential_install.log
 echo "Build Essential installed."
 
 # Install required programs using Homebrew
-brew bundle install --file=Brewfile &> logs/brew_bundle_install.log
+brew bundle install --file=Brewfile --quiet
 echo "Required programs installed successfully."
 
 # Add spacing for clarity
