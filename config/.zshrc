@@ -1,6 +1,7 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
+######################################################################################
+# P10k instant prompt, Homebrew, Zinit setup
+######################################################################################
+# Initialize Power10k instant prompt. Should be at the top of .zshrc.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -21,9 +22,12 @@ fi
 # Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Add in Powerlevel10k
+# Load p10k theme
 zinit ice depth=1; zinit light romkatv/powerlevel10k
-# Add in zsh plugins
+
+######################################################################################
+# Plugins, completions && Keybindings
+######################################################################################
 zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
@@ -65,50 +69,64 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color=always $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color=always $realpath'
 
+######################################################################################
 # Misc Environmental variables
+######################################################################################
+export EDITOR='micro'
+export "MICRO_TRUECOLOR=1"    # https://github.com/catppuccin/micro
 export ZSH_AUTOSUGGEST_STRATEGY=(
     history
     completion
 )
-# Aliases
-alias c='clear'
-alias apt='sudo apt'
-alias python='python3'
 
-if command -v eza &> /dev/null; then  ## If eza is installed, set an alias for ls --> eza --icons, highlights changes to git. 
+######################################################################################
+# Aliases
+######################################################################################
+alias c='clear'
+alias i='sudo apt install'
+alias python='python3'
+## If eza is installed, set an alias for ls --> eza --icons, highlights changes to git. 
+if command -v eza &> /dev/null; then  
   alias ls='eza --icons --git'        
   alias lst='eza --icons --tree --level=2'
   alias lsd='eza --icons --tree -d'
-  alias la='eza --icons -a -l'
+  alias lsa='eza --icons -a -l'
 fi
 if command -v code &> /dev/null; then
   alias zshconf='code ~/.zshrc'
 elif command -v micro &> /dev/null; then
   alias zshconf='micro ~/.zshrc'
-fi
-if [[ -n "$WSL_DISTRO_NAME" ]]; then                                        ## Check if the distro is running on WSL, then enable the following if true. 
-  command -v op.exe &> /dev/null && alias ssh="ssh.exe"                     ## If 1password is installed.
+fi 
+######################################################################################
+## For WSL, set up aliases for ssh and OneCommander
+######################################################################################
+if [[ -n "$WSL_DISTRO_NAME" ]]; then                                       
+  command -v op.exe &> /dev/null && alias ssh="ssh.exe"                     ## Allows ssh to use 1password for ssh keys.
   command -v OneCommander.exe &> /dev/null && alias oc="OneCommander.exe ." ## If OneCommander is installed on Windows, open current folder in OneCommander.
 fi
-
+######################################################################################
 # Shell integrations
-if command -v fzf &> /dev/null; then                   ## If fzf is installed, initializes fzf and sets up sane fzf defaults. 
+######################################################################################
+ ## If fzf is installed, initializes fzf and sets up sane fzf defaults. 
+if command -v fzf &> /dev/null; then                  
   eval "$(fzf --zsh)" 
   export FZF_COMPLETION_TRIGGER='--'                   ## Change the tab-shortcut from ** to --
   command -v bat &> /dev/null && {                     ## If bat is installed, set up fzf to use bat as the previewer.
     export FZF_DEFAULT_OPTS='--preview "bat --color=always --style=numbers --line-range :500 {}"'
   }
   command -v fd &> /dev/null && {                      ## If fd is installed, set up fzf to use fd as the default command.
-    export FZF_DEFAULT_COMMAND='fd --type file --hidden'
+    export FZF_DEFAULT_COMMAND='fd -t d . $HOME'
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     export FZF_ALT_C_COMMAND="fd -t d . $HOME"
   }
 fi
-
-if command -v zoxide &> /dev/null; then ## Checks if zoxide is installed and Initialize zoxide
-    # export _ZO_DATA_DIR=~/              ## Set zoxide to save db to home folder, so it can be added to dotfile backup easily. 
+## Checks if zoxide is installed and Initialize zoxide
+if command -v zoxide &> /dev/null; then 
     eval "$(zoxide init --cmd cd zsh)"
-
 fi
+
+######################################################################################
+# Settings to be loaded last. Keep this section at the bottom of the file.
+######################################################################################
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
